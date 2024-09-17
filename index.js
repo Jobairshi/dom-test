@@ -51,10 +51,10 @@ function addTodoMain(name, key) {
     else {
         todoDiv.classList.add('bg-red-400');
     }
-    todoDiv.value = (key + 1) + ".      " + name.name;
+    todoDiv.value = name.name;
 
     const checkButton = document.createElement('button')
-    checkButton.classList.add('border-2', 'p-2')
+    checkButton.classList.add('border-2','rounded-lg', 'p-3')
     if (name.iscom === true) {
         checkButton.innerText = 'complete'
         checkButton.classList.add('bg-green-300')
@@ -75,14 +75,20 @@ function addTodoMain(name, key) {
     }
     const deleteButton = document.createElement('button');
     deleteButton.innerText = 'delete';
-    deleteButton.classList.add('bg-red-300')
+    deleteButton.classList.add('bg-red-300','rounded-lg', 'p-3')
+    deleteButton.onclick = () => {
+        todoDivMain.removeChild(upperTodo)
+    }
 
     const updateButton = document.createElement('button');
     updateButton.innerText = 'update'
+    updateButton.classList.add('bg-pink-400', 'rounded-lg', 'p-3')
 
 
-    deleteButton.onclick = () => {
-        todoDivMain.removeChild(upperTodo)
+    updateButton.onclick = ()=>{
+        const name = todoDiv.value;
+        alert(name)
+        todos[key].name = name; 
     }
 
 
@@ -90,6 +96,7 @@ function addTodoMain(name, key) {
     upperTodo.append(todoDiv)
     upperTodo.append(checkButton)
     upperTodo.append(deleteButton)
+    upperTodo.append(updateButton);
     return upperTodo;
 }
 
