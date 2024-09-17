@@ -7,32 +7,26 @@ async function fetchData() {
     return datas;
 };
 
-( function getTodo() {
+(function getTodo() {
 
     let datas = localStorage.getItem('datas');
-    datas=  JSON.parse(datas);
-    // if(datas)
-    // {
-    //     datas = JSON.parse(datas);
-    // }
-    // else{
-    //     datas = [];
-    // }
+    datas = JSON.parse(datas);
     
+
     console.log(datas);
     const mainDiv = document.getElementById('main');
     const getData = document.createElement('button');
     getData.innerText = 'get random todo data from API';
-    getData.onclick = ()=>{
+    getData.onclick = () => {
         getData.style.backgroundColor = 'green';
         getData.innerText = 'data fetched'
-        fetchData().then(()=>{
-            location.reload(); 
+        fetchData().then(() => {
+            location.reload();
         });
-        
+
     }
 
-   
+
 
 
     // add todo
@@ -49,8 +43,8 @@ async function fetchData() {
     todoInput.style.height = '30px';
     todoInput.style.marginBottom = '10px';
     todoInput.placeholder = 'add todo here';
-    
-    
+
+
 
 
 
@@ -69,15 +63,15 @@ async function fetchData() {
             userId: uid
         })
         alert('new todo added!!')
-        localStorage.setItem('datas',JSON.stringify(datas));
+        localStorage.setItem('datas', JSON.stringify(datas));
         location.reload();
-        
-       // console.log(JSON.parse(datas))
+
+        // console.log(JSON.parse(datas))
     }
     todoDiv.append(addButton);
     todoDiv.append(todoInput);
     mainDiv.append(todoDiv);
-    
+
     mainDiv.append(getData);
 
     datas.map((elem, idx) => {
@@ -101,7 +95,7 @@ async function fetchData() {
 
         const newInput = document.createElement('input');
         newInput.style.width = '300px'
-        newInput.style.height ='50px'
+        newInput.style.height = '50px'
         newInput.id = 'input' + idx;
         newInput.value = title;
 
@@ -134,8 +128,8 @@ async function fetchData() {
                 com.style.backgroundColor = 'red';
             }
             elem.completed = newcheck.checked;
-            
-            localStorage.setItem('datas',JSON.stringify(datas));
+
+            localStorage.setItem('datas', JSON.stringify(datas));
             // console.log("check box clicked");
 
         }
@@ -147,17 +141,16 @@ async function fetchData() {
         deleteButton.innerText = "delete";
         deleteButton.onclick = () => {
             mainDiv.removeChild(perTodo)
-            
+
             //find idx
-            const findIdx = datas.findIndex(todo=>todo.id === elem.id);
-            if(findIdx > -1)
-            {
-                datas.splice(findIdx,1);
+            const findIdx = datas.findIndex(todo => todo.id === elem.id);
+            if (findIdx > -1) {
+                datas.splice(findIdx, 1);
             }
-            
-            localStorage.setItem('datas',JSON.stringify(datas));
+
+            localStorage.setItem('datas', JSON.stringify(datas));
             let temp = localStorage.getItem('datas');
-             temp=  JSON.parse(temp);
+            temp = JSON.parse(temp);
             console.log(temp);
         }
 
@@ -197,19 +190,3 @@ async function fetchData() {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-
-// function getRandomColor() {
-//     const randomValue = () => Math.floor(Math.random() * 256);
-//     const r = randomValue();
-//     const g = randomValue();
-//     const b = randomValue();
-//     return `rgb(${r}, ${g}, ${b})`;
-// }
-// (function disco()
-// {
-
-//     const dj = document.getElementById('dj')
-//         setInterval(()=>{
-//             dj.style.backgroundColor = getRandomColor();
-//         },10)
-// })()
